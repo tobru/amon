@@ -8,8 +8,8 @@ services:
       - "443:443"
     volumes:
       - "./Caddyfile:/etc/Caddyfile"
-      - "./caddy:/root/.caddy"
       - "./amon/static:/srv/static"
+      - "caddy:/root/.caddy"
     links:
       - "amon:amon"
     depends_on:
@@ -20,7 +20,7 @@ services:
     expose:
       - "27017"
     volumes:
-      - "./mongodb:/data/db:rw"
+      - "mongodb:/data/db:rw"
   amon:
     build: "."
     restart: always
@@ -30,3 +30,7 @@ services:
       - "mongodb:mongodb"
     depends_on:
       - "mongodb"
+
+volumes:
+  mongodb:
+  caddy:
